@@ -55,19 +55,19 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
                         id="category"
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
-                        className="w-full p-2 rounded border shadow bg-gradient-to-r from-black-100 to-gray-800 capitalize text-white"
+                        className="w-full p-2 rounded border bg-transparent text-white"
                     >
-                        <option value="produce">Produce</option>
-                        <option value="dairy">Dairy</option>
-                        <option value="bakery">Bakery</option>
-                        <option value="meat">Meat</option>
-                        <option value="frozen foods">Frozen Foods</option>
-                        <option value="canned goods">Canned Goods</option>
-                        <option value="dry goods">Dry Goods</option>
-                        <option value="beverages">Beverages</option>
-                        <option value="snacks">Snacks</option>
-                        <option value="household">Household</option>
-                        <option value="other">Other</option>
+                            <option value="produce" className="bg-black text-white">Produce</option>
+                            <option value="dairy" className="bg-black text-white">Dairy</option>
+                            <option value="bakery" className="bg-black text-white">Bakery</option>
+                            <option value="meat" className="bg-black text-white">Meat</option>
+                            <option value="frozen foods" className="bg-black text-white">Frozen Foods</option>
+                            <option value="canned goods" className="bg-black text-white">Canned Goods</option>
+                            <option value="dry goods" className="bg-black text-white">Dry Goods</option>
+                            <option value="beverages" className="bg-black text-white">Beverages</option>
+                            <option value="snacks" className="bg-black text-white">Snacks</option>
+                            <option value="household" className="bg-black text-white">Household</option>
+                            <option value="other" className="bg-black text-white">Other</option>
                     </select>
                 </div>
 
