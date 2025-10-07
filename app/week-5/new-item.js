@@ -20,19 +20,19 @@ const New_Item = ({quantity: initialQuantity}) => {
         <div className="border p-4 mb-4 rounded shadow bg-gradient-to-r from-black-100 to-gray-800">
             <div className="flex items-center space-x-4">
                 <button
-                    className="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold"
+                    className="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border border-white"
                     onClick={decrement}
                     disabled={quantity <= 1}
                 >
-                    -
+                    +
                 </button>
                 <p className="text-white text-lg font-bold">Quantity: {quantity}</p>
                 <button
-                    className="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold"
+                    className="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border border-white"
                     onClick={increment}
                     disabled={quantity >= 20}
                 >
-                    +
+                    -
                 </button>
             </div>
         </div>
