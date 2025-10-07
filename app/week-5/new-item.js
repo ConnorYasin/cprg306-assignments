@@ -93,7 +93,7 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
 
                 <button
                     type="submit"
-                    className="bg-black text-white px-4 py-2 rounded font-bold hover:bg-blue-600 border-white"
+                    className="bg-black text-white px-4 py-2 rounded font-bold hover:bg-blue-600 border border-white"
                 >
                     Submit
                 </button>
@@ -104,9 +104,9 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
                 <ul className="border p-4 mb-4 rounded shadow bg-gradient-to-r from-black-100 to-gray-800 capitalize text-white">
                     {items.map((item, index) => (
                         <li key={index}>
-                            <p>{"Item Name:" + item.name}</p>
-                            <p>{"Category:" + item.category}</p>
-                            <p>{"Quantity:" + item.quantity}</p>
+                            <p>{"Item Name: " + item.name}</p>
+                            <p>{"Category: " + item.category}</p>
+                            <p>{"Quantity: " + item.quantity}</p>
                         </li>
                     ))}
                 </ul>
