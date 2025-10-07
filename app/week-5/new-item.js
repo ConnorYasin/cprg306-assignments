@@ -20,8 +20,8 @@ const New_Item = ({quantity: initialQuantity, name:initialName, category:initial
 
     return (
         <div className="border p-4 mb-4 rounded shadow bg-gradient-to-r from-black-100 to-gray-800 capitalize text-white">
-            <p>Item Name: {name}</p>
-            <p>Category: {category}</p>
+            <p className="text-white text-lg font-bold">Item Name: {name}</p>
+            <p className="text-white text-lg font-bold">Category: {category}</p>
             <div className="flex items-center space-x-4">
                 <button
                     className="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border border-white"
