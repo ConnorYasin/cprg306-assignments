@@ -47,7 +47,7 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
                     />
                 </div>
 
-                <div className="mb-4">
+                <div className="border p-4 mb-4 rounded shadow bg-gradient-to-r from-black-100 to-gray-800 capitalize text-white">
                     <label htmlFor="category" className="block text-white text-lg font-bold mb-2">
                         Category:
                     </label>
