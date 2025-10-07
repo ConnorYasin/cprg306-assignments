@@ -8,15 +8,17 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
     const [items, setItems] = useState([]); 
 
     const increment = () => {
-        if (quantity < 20){
+        if (quantity < 20) {
+            console.log("Incrementing quantity:", quantity + 1);
             setQuantity(quantity + 1);
-        };
+        }
     };
 
     const decrement = () => {
         if (quantity > 1) {
+            console.log("Decrementing quantity:", quantity - 1);
             setQuantity(quantity - 1);
-        };
+        }
     };
 
     const handleSubmit = (event) => {
@@ -91,7 +93,7 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
 
                 <button
                     type="submit"
-                    className="bg-black text-white px-4 py-2 rounded font-bold hover:bg-blue-600"
+                    className="bg-black text-white px-4 py-2 rounded font-bold hover:bg-blue-600 border-white"
                 >
                     Submit
                 </button>
