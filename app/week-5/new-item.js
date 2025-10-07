@@ -53,7 +53,7 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
                         id="category"
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
-                        className="w-full p-2 rounded border border-gray-300 bg-transparent text-white"
+                        className="w-full p-2 rounded border border-gray-300 bg-black text-white"
                     >
                         <option value="produce">Produce</option>
                         <option value="dairy">Dairy</option>
@@ -91,7 +91,7 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
 
                 <button
                     type="submit"
-                    className="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-600"
+                    className="bg-black text-white px-4 py-2 rounded font-bold hover:bg-blue-600"
                 >
                     Submit
                 </button>
@@ -99,16 +99,12 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
 
             <div>
                 <h2 className="text-white text-xl font-bold mb-4">Submitted Items:</h2>
-                <ul className="space-y-2">
+                <ul className="border p-4 mb-4 rounded shadow bg-gradient-to-r from-black-100 to-gray-800 capitalize text-white">
                     {items.map((item, index) => (
-                        <li
-                            key={index}
-                            className="border p-2 rounded bg-gray-700 text-white flex justify-between"
-                        >
-                            <span>
-                                <strong>{item.name}</strong> ({item.category})
-                            </span>
-                            <span>Quantity: {item.quantity}</span>
+                        <li key={index}>
+                            <p>{"Item Name:" + item.name}</p>
+                            <p>{"Category:" + item.category}</p>
+                            <p>{"Quantity:" + item.quantity}</p>
                         </li>
                     ))}
                 </ul>
