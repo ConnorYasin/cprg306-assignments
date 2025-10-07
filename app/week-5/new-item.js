@@ -47,7 +47,7 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
                     />
                 </div>
 
-                <div className="border p-4 mb-4 rounded shadow bg-gradient-to-r from-black-100 to-gray-800 capitalize text-white">
+                <div className="mb-4">
                     <label htmlFor="category" className="block text-white text-lg font-bold mb-2">
                         Category:
                     </label>
@@ -55,7 +55,7 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
                         id="category"
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
-                        className="w-full p-2 rounded border border-gray-300 bg-black text-white"
+                        className="w-full p-2 rounded border shadow bg-gradient-to-r from-black-100 to-gray-800 capitalize text-white"
                     >
                         <option value="produce">Produce</option>
                         <option value="dairy">Dairy</option>
