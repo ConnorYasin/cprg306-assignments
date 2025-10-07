@@ -3,7 +3,7 @@ import New_Item from "./new-item.js";
 const Page = () => {
     return (
         <main>
-            <h1 className='font-bold text-5xl m-5'>New Item Quantity Changer</h1>
+            <h1 className='font-bold text-5xl m-5'>New Item Creator</h1>
             <New_Item />
         </main>
     );
