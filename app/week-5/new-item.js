@@ -5,6 +5,7 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
     const [quantity, setQuantity] = useState(initialQuantity || 1);
     const [name, setName] = useState(initialName || "");
     const [category, setCategory] = useState(initialCategory || "produce");
+    const [items, setItems] = useState([]); 
 
     const increment = () => {
         if (quantity < 20){
@@ -20,82 +21,99 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("Item Submitted:");
-        console.log("Name:", name);
-        console.log("Quantity:", quantity);
-        console.log("Category:", category);
+        const newItem = { name, quantity, category };
+        setItems([...items, newItem]);
+        setName("");
+        setQuantity(1);
+        setCategory("produce");
     };
 
     return (
-        <form
-            onSubmit={handleSubmit}
-            className="border p-4 mb-4 rounded shadow bg-gradient-to-r from-black-100 to-gray-800 capitalize text-white"
-        >
-            <div className="mb-4">
-                <label htmlFor="item-name" className="block text-white text-lg font-bold mb-2">
-                    Item Name:
-                </label>
-                <input
-                    id="item-name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    className="w-full p-2 rounded border border-gray-300 text-black"
-                />
-            </div>
+        <div className="border p-4 mb-4 rounded shadow bg-gradient-to-r from-black-100 to-gray-800 capitalize text-white">
+            <form onSubmit={handleSubmit} className="mb-6">
+                <div className="mb-4">
+                    <label htmlFor="item-name" className="block text-white text-lg font-bold mb-2">
+                        Item Name:
+                    </label>
+                    <input
+                        id="item-name"
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        className="w-full p-2 rounded border border-gray-300 bg-transparent text-white"
+                    />
+                </div>
 
-            <div className="mb-4">
-                <label htmlFor="category" className="block text-white text-lg font-bold mb-2">
-                    Category:
-                </label>
-                <select
-                    id="category"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="w-full p-2 rounded border border-gray-300 text-black"
-                >
-                    <option value="produce">Produce</option>
-                    <option value="dairy">Dairy</option>
-                    <option value="bakery">Bakery</option>
-                    <option value="meat">Meat</option>
-                    <option value="frozen foods">Frozen Foods</option>
-                    <option value="canned goods">Canned Goods</option>
-                    <option value="dry goods">Dry Goods</option>
-                    <option value="beverages">Beverages</option>
-                    <option value="snacks">Snacks</option>
-                    <option value="household">Household</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
+                <div className="mb-4">
+                    <label htmlFor="category" className="block text-white text-lg font-bold mb-2">
+                        Category:
+                    </label>
+                    <select
+                        id="category"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        className="w-full p-2 rounded border border-gray-300 bg-transparent text-white"
+                    >
+                        <option value="produce">Produce</option>
+                        <option value="dairy">Dairy</option>
+                        <option value="bakery">Bakery</option>
+                        <option value="meat">Meat</option>
+                        <option value="frozen foods">Frozen Foods</option>
+                        <option value="canned goods">Canned Goods</option>
+                        <option value="dry goods">Dry Goods</option>
+                        <option value="beverages">Beverages</option>
+                        <option value="snacks">Snacks</option>
+                        <option value="household">Household</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
 
-            <div className="flex items-center space-x-4 mb-4">
+                <div className="flex items-center space-x-4 mb-4">
+                    <button
+                        type="button"
+                        className="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border border-white"
+                        onClick={decrement}
+                        disabled={quantity <= 1}
+                    >
+                        -
+                    </button>
+                    <p className="text-white text-lg font-bold">Quantity: {quantity}</p>
+                    <button
+                        type="button"
+                        className="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border border-white"
+                        onClick={increment}
+                        disabled={quantity >= 20}
+                    >
+                        +
+                    </button>
+                </div>
+
                 <button
-                    type="button"
-                    className="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border border-white"
-                    onClick={decrement}
-                    disabled={quantity <= 1}
+                    type="submit"
+                    className="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-600"
                 >
-                    -
+                    Submit
                 </button>
-                <p className="text-white text-lg font-bold">Quantity: {quantity}</p>
-                <button
-                    type="button"
-                    className="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border border-white"
-                    onClick={increment}
-                    disabled={quantity >= 20}
-                >
-                    +
-                </button>
-            </div>
+            </form>
 
-            <button
-                type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-600"
-            >
-                Submit
-            </button>
-        </form>
+            <div>
+                <h2 className="text-white text-xl font-bold mb-4">Submitted Items:</h2>
+                <ul className="space-y-2">
+                    {items.map((item, index) => (
+                        <li
+                            key={index}
+                            className="border p-2 rounded bg-gray-700 text-white flex justify-between"
+                        >
+                            <span>
+                                <strong>{item.name}</strong> ({item.category})
+                            </span>
+                            <span>Quantity: {item.quantity}</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
     );
 };
 
