@@ -1,11 +1,10 @@
 'use client';
 import { useState } from 'react';
 
-const New_Item = ({ quantity: initialQuantity, name: initialName, category: initialCategory }) => {
+const New_Item = ({ onAddItem, quantity: initialQuantity, name: initialName, category: initialCategory }) => {
     const [quantity, setQuantity] = useState(initialQuantity || 1);
     const [name, setName] = useState(initialName || "");
     const [category, setCategory] = useState(initialCategory || "produce");
-    const [items, setItems] = useState([]); 
 
     const increment = () => {
         if (quantity < 20) {
@@ -23,8 +22,15 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const newItem = { name, quantity, category };
-        setItems([...items, newItem]);
+        const normalizedName = (name || "").trim().toLowerCase();
+        if (!normalizedName) return; // avoid submitting empty names
+
+        const newItem = { name: normalizedName, quantity, category };
+        // pass new item to parent handler
+        if (typeof onAddItem === 'function') {
+            onAddItem(newItem);
+        }
+        // reset form
         setName("");
         setQuantity(1);
         setCategory("produce");
@@ -98,19 +104,6 @@ const New_Item = ({ quantity: initialQuantity, name: initialName, category: init
                     Submit
                 </button>
             </form>
-
-            <div>
-                <h2 className="text-white text-xl font-bold mb-4">Submitted Items:</h2>
-                <ul className="border p-4 mb-4 rounded shadow bg-gradient-to-r from-black-100 to-gray-800 capitalize text-white">
-                    {items.map((item, index) => (
-                        <li key={index}>
-                            <p>{"Item Name: " + item.name}</p>
-                            <p>{"Category: " + item.category}</p>
-                            <p>{"Quantity: " + item.quantity}</p>
-                        </li>
-                    ))}
-                </ul>
-            </div>
         </div>
     );
 };

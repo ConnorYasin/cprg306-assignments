@@ -2,10 +2,8 @@
 
 import Item from './item';
 import { useState } from 'react';
-import itemsData from './items.json';
 
-const ItemList = () => {
-    const [items] = useState(itemsData);
+const ItemList = ({ items = [] }) => {
     const [sortBy, setSortBy] = useState('name');
 
     const sortedItems = [...items].sort((a, b) => {
@@ -23,16 +21,20 @@ const ItemList = () => {
             <div className="mb-4">
                 <button
                     onClick={() => handleSortChange('name')}
-                    className={`px-4 py-2 mr-2 ${
-                        sortBy === 'name' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
+                    className={`px-4 py-2 mr-2 rounded font-bold border border-white ${
+                        sortBy === 'name'
+                            ? 'bg-gray-600 text-white hover:bg-gray-700'
+                            : 'bg-black text-white hover:bg-gray-600'
                     }`}
                 >
                     Sort by Name
                 </button>
                 <button
                     onClick={() => handleSortChange('category')}
-                    className={`px-4 py-2 ${
-                        sortBy === 'category' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
+                    className={`px-4 py-2 rounded font-bold border border-white ${
+                        sortBy === 'category'
+                            ? 'bg-gray-600 text-white hover:bg-gray-700'
+                            : 'bg-black text-white hover:bg-gray-600'
                     }`}
                 >
                     Sort by Category
