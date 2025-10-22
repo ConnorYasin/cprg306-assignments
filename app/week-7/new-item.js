@@ -99,7 +99,7 @@ const New_Item = ({ onAddItem, quantity: initialQuantity, name: initialName, cat
 
                 <button
                     type="submit"
-                    className="bg-black text-white px-4 py-2 rounded font-bold hover:bg-blue-600 border border-white"
+                    className="bg-black text-white px-4 py-2 rounded font-bold hover:bg-gray-600 border border-white"
                 >
                     Submit
                 </button>
