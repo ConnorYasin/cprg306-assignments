@@ -1,9 +1,9 @@
 "use client";
 
+import React, { useState } from 'react';
 import Item from './item';
-import { useState } from 'react';
 
-const ItemList = ({ items = [] }) => {
+const ItemList = ({ items = [], onItemSelect }) => {
     const [sortBy, setSortBy] = useState('name');
 
     const sortedItems = [...items].sort((a, b) => {
@@ -43,12 +43,24 @@ const ItemList = ({ items = [] }) => {
 
             <ul className="capitalize list-none p-0">
                 {sortedItems.map((item) => (
-                    <Item 
+                    <li
                         key={item.id}
-                        name={item.name}
-                        quantity={item.quantity}
-                        category={item.category}
-                    />
+                        className="mb-2 cursor-pointer"
+                        onClick={() => {
+                            console.log('Item clicked (List):', item);
+                            if (typeof onItemSelect === 'function') onItemSelect(item);
+                        }}
+                    >
+                        <Item
+                            name={item.name}
+                            quantity={item.quantity}
+                            category={item.category}
+                            onSelect={() => {
+                                console.log('Item clicked (Component onSelect):', item);
+                                if (typeof onItemSelect === 'function') onItemSelect(item);
+                            }}
+                        />
+                    </li>
                 ))}
             </ul>
         </div>
