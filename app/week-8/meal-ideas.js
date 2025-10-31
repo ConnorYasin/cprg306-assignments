@@ -26,17 +26,30 @@ export async function fetchMealIdeas(ingredient) {
 const MealIdeas = ({ ingredient }) => {
   const [meals, setMeals] = useState([]);
 
-  const loadMealIdeas = async () => {
-    if (!ingredient) {
-      setMeals([]);
-      return;
-    }
-    const results = await fetchMealIdeas(ingredient);
-    setMeals(results);
-  };
-
   useEffect(() => {
+    // Cancellation flag used to prevent state updates from an out-of-date async operation.
+    let active = true;
+
+    const loadMealIdeas = async () => {
+      if (!ingredient) {
+        if (active) setMeals([]);
+        return;
+      }
+      try {
+        const results = await fetchMealIdeas(ingredient);
+        // Only update state if this effect is still the "active" one.
+        if (active) setMeals(results);
+      } catch (err) {
+        if (active) setMeals([]);
+      }
+    };
+
     loadMealIdeas();
+
+    return () => {
+      // Mark this effect as inactive so any late-arriving async results are ignored.
+      active = false;
+    };
   }, [ingredient]);
 
   return (
@@ -46,7 +59,7 @@ const MealIdeas = ({ ingredient }) => {
       {!ingredient ? (
         <p className="text-sm text-gray-300">Select a shopping item to load meal ideas.</p>
       ) : meals.length === 0 ? (
-        <p className="text-sm text-gray-300">No meals found for "{ingredient}".</p>
+        <p className="text-sm text-gray-300">No meals found for {ingredient}.</p>
       ) : (
         <ul className="list-none p-0">
           {meals.map((m) => (
