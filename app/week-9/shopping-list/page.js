@@ -1,13 +1,42 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
+import { useUserAuth } from "../../contexts/AuthContext";
 import ItemList from "./item-list";
 import New_Item from "./new-item";
 import itemsData from "./items.json";
 import MealIdeas from "./meal-ideas";
 
-const Page = () => {
+export default function Page() {
+  const { user, gitHubSignIn } = useUserAuth();
+
+  // Always call hooks in the same order — move state hooks here so they run
+  // regardless of whether we return early for unauthenticated users.
   const [items, setItems] = useState(itemsData);
   const [selectedItemName, setSelectedItemName] = useState("");
+
+  // If no user, do not render the shopping list page.
+  if (!user) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-black p-6">
+        <section className="max-w-md w-full border p-4 mb-4 rounded shadow bg-gradient-to-r from-black-100 to-gray-800 capitalize text-white backdrop-blur text-center">
+          <h1 className="text-2xl font-semibold mb-3 normal-case">Access denied</h1>
+          <p className="text-sm text-gray-300 mb-6 normal-case">
+            You must be signed in to view the shopping list.
+          </p>
+
+          <div className="flex gap-3">
+            <Link
+              href="/week-9"
+              className="flex-1 inline-flex items-center justify-center bg-black text-white px-4 py-2 rounded font-bold hover:bg-gray-600 border border-white"
+            >
+              Back to Login Page
+            </Link>
+          </div>
+        </section>
+      </main>
+    );
+  }
 
   // add a new item; assigns a unique numeric id and appends to state
   const handleAddItem = (newItem) => {
@@ -60,5 +89,3 @@ const Page = () => {
     </main>
   );
 };
-
-export default Page;
